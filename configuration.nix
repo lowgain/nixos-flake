@@ -5,10 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [ ./hardware-configuration.nix ];
 
   boot.loader = {
     efi = {
@@ -56,6 +53,7 @@
   i18n.defaultLocale = "en_US.utf8";
 
   services.xserver = {
+
     enable = true;
     displayManager.lightdm.enable = true;
     windowManager.bspwm.enable = true;
@@ -64,15 +62,13 @@
     layout = "us";
     xkbVariant = "";
 
-    # Enable trackpad
-    libinput.enable = true;
   };
 
-  hardware = {
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
-    };
+  # modify display method
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   # Enable sound with pipewire.
@@ -100,6 +96,10 @@
     exa
     ranger
     fd
+    pa_applet
+    pavucontrol
+    keepassxc
+    neofetch
   ];
 
   users.users.marshey = {

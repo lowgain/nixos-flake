@@ -24,14 +24,16 @@
           foreground = "\${colors.foreground}";
           height = "30px";
           module-margin = 1;
-          modules-left = "xworkspaces";
+          modules-left = "powermenu bspwm";
           modules-center = "date";
           modules-right = "battery";
           override-redirect = "true";
+          padding-left = 1;
           padding-right = 1;
           tray-position = "right";
           width = "100%";
           wm-restack = "bspwm";
+          separator = "";
         };
         "module/battery" = {
           type = "internal/battery";
@@ -55,18 +57,25 @@
           label = "%time%";
           time = "%a %l:%M %P";
         };
-        "module/xworkspaces" = {
-          type = "internal/xworkspaces";
-          label-active = "%index%";
-          label-active-background = "\${colors.background-alt}";
-          label-active-padding = 1;
-          label-active-underline = "\${colors.primary}";
-          label-empty = "%index%";
-          label-empty-padding = 1;
-          label-occupied = "%index%";
-          label-occupied-padding = 1;
-          label-urgent = "%index%";
-          label-urgent-padding = 1;
+        "module/bspwm" = {
+          type = "internal/bspwm";
+          label-dimmed = " %index% ";
+          label-focused = " %index% ";
+          label-focused-background = "\${colors.background-alt}";
+          label-occupied = " %index% ";
+          label-urgent = " %index% ";
+          label-empty = " %index% ";
+        };
+        "module/powermenu" = {
+          type = "custom/menu";
+          expand-right = true;
+          label-open = "pwr";
+          label-close = "X";
+          label-separator = " ";
+          menu-0-0 = "shutdown";
+          menu-0-0-exec = "poweroff";
+          menu-0-1 = "restart";
+          menu-0-1-exec = "reboot";
         };
         "settings" = {
           pseudo-transparency = "true";

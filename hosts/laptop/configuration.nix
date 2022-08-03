@@ -27,6 +27,18 @@
   # Enable Qemu/KVM
   virtualisation.libvirtd.enable = true;
 
+  # Set lid switch action
+  services.logind.lidSwitch = "ignore";
+
+  # Enable trackpad
+  services.xserver.libinput.enable = true;
+
+  # Enable phone mounting
+  services.gvfs.enable = true;
+
+  # Enable android connection with adb
+  programs.adb.enable = true;
+
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     virt-manager

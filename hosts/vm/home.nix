@@ -17,18 +17,8 @@
   nixpkgs.config.allowUnfree = true;
 
   # Install applications
-  home.packages = with pkgs; [
-    neofetch
-    pavucontrol
-    keepassxc
-    mullvad-vpn
-    xfce.thunar
-    pa_applet
-    ranger
-    exa
-    fd
-    ripgrep
-  ];
+  # home.packages = with pkgs; [
+  # ];
 
   xsession = {
     windowManager = {
@@ -38,7 +28,7 @@
           "pa-applet"
         ];
         monitors = {
-          eDP = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" ];
+#           eDP = [ "1" "2" "3" "4" "5" "6" "7" "8" "9" "0" ];
         };
       };
     };

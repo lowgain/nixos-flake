@@ -6,6 +6,7 @@
   networking = {
     hostName = "fridge";
     firewall = {
+      enable = true;
       allowedTCPPorts = [  ];
       allowedUDPPorts = [  ];
     };

@@ -1,10 +1,9 @@
 { pkgs, ... }:
 
 {
-  programs = {
-    fish = {
-      enable = true;
-      shellAliases = {
+  programs.fish = {
+    enable = true;
+    shellAliases = {
       "c" = "clear";
       "home" = "cd ~";
       ".." = "cd ..";
@@ -16,7 +15,6 @@
       "ll" = "exa -l";
       "la" = "exa -la";
       "grep" = "rg";
-      };
     };
   };
 }
