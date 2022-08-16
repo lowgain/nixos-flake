@@ -13,5 +13,6 @@
     ( import ./neovim.nix )
     ( import ./rofi.nix )
     ( import ./git.nix )
+    ( import ./mangohud.nix )
   ];
 }

@@ -20,7 +20,6 @@
   home.packages = with pkgs; [
     neofetch
     pavucontrol
-    steam
     librewolf
     spotify
     discord
@@ -33,6 +32,14 @@
     xfce.thunar
     xfce.xfce4-terminal
     deluge
+    mate.atril
+    ardour
+    swh_lv2
+    lsp-plugins
+    guitarix
+    tonelib-metal
+    tonelib-gfx
+    libreoffice
   ];
 
   xsession = {

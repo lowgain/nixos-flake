@@ -18,7 +18,6 @@
 
   # Install applications
   home.packages = with pkgs; [
-    steam
     librewolf
     spotify
     discord
@@ -31,6 +30,8 @@
     mullvad-vpn
     gnucash
     deluge
+    mate.atril
+    libreoffice
   ];
 
   xsession = {

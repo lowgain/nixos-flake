@@ -9,6 +9,7 @@
       enable = true;
       allowedTCPPorts = [  ];
       allowedUDPPorts = [  ];
+    wireless.iwd.enable = true;
     };
   };
 
@@ -18,6 +19,12 @@
 
   # Enable Qemu/KVM
   virtualisation.libvirtd.enable = true;
+
+  # Enable steam
+  programs.steam.enable = true;
+
+  # Enable Gamemode
+  programs.gamemode.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [

@@ -5,7 +5,7 @@
     enable = true;
     shellAliases = {
       "c" = "clear";
-      "home" = "cd ~";
+      "home" = "cd ~ && clear";
       ".." = "cd ..";
       "..." = "cd ../..";
       "vim" = "nvim";

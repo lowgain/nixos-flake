@@ -71,16 +71,25 @@
     driSupport32Bit = true;
   };
 
-  # Enable sound with pipewire.
+  # Enable sound
   sound.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = {
+  services = {
+    pipewire = {
     enable = true;
+    audio.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    };
+    #jack = {
+    #  jackd.enable = true;
+    #};
   };
+
+  # Git Service
+  programs.git.enable = true;
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
@@ -100,14 +109,14 @@
     pavucontrol
     keepassxc
     neofetch
+    cmatrix
   ];
 
   users.users.marshey = {
     isNormalUser = true;
     description = "Logan Thompson";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "jackaudio" ];
     initialPassword = "password";
-    # shell = pkgs.fish;
   };
 
   services = {
