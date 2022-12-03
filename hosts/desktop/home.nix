@@ -27,7 +27,6 @@
     betterdiscordctl
     wineWowPackages.staging
     lutris
-    mullvad-vpn
     brightnessctl
     cmus
     veracrypt
@@ -45,6 +44,7 @@
     gimp
     libreoffice
     openrgb
+    jamesdsp
   ];
 
   # Bluetooth tray applet
@@ -55,10 +55,10 @@
       bspwm = {
         startupPrograms = [
           "polybar mybar -r"
-          "mullvad-vpn"
           "deluge-gtk"
           "blueman-applet"
           "pa-applet"
+          "jamesdsp"
           "$HOME/.screenlayout/default.sh"
           "feh --bg-fill $HOME/.background-image.*"
         ];
