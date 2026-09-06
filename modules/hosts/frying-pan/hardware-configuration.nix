@@ -9,10 +9,14 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci"];
-    boot.initrd.kernelModules = [];
-    boot.kernelModules = ["kvm-amd"];
-    boot.extraModulePackages = [];
+    boot = {
+      initrd = {
+        availableKernelModules = ["nvme" "xhci_pci" "ahci"];
+        kernelModules = [];
+      };
+      kernelModules = ["kvm-amd"];
+      extraModulePackages = [];
+    };
 
     fileSystems."/" = {
       device = "/dev/disk/by-uuid/3d3e5b01-bb5e-4025-b622-b38585ef5f36";
@@ -31,7 +35,5 @@
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
     hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    services.fwupd.enable = true;
-    services.fstrim.enable = true;
   };
 }

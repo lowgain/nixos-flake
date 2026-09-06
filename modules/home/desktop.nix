@@ -13,10 +13,7 @@
     programs = {
       cmus.enable = true;
       pyradio.enable = true;
-      libreoffice = {
-        enable = true;
-        package = pkgs.libreoffice-qt;
-      };
+      onlyoffice.enable = true;
     };
 
     home = {
