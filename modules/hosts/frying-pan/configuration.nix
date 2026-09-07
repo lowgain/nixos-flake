@@ -15,7 +15,7 @@
       self.nixosModules.nix
       self.nixosModules.shell
       self.nixosModules.desktop
-      self.nixosModules.nvf
+      # self.nixosModules.nvf
       self.nixosModules.gaming
     ];
 
@@ -72,6 +72,7 @@
         self.homeModules.niri
         self.homeModules.desktop
         self.homeModules.gaming
+        self.homeModules.neovim
         {
           programs.niri.settings = {
             outputs = {
