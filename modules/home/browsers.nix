@@ -1,16 +1,7 @@
 {
   flake.homeModules.browsers = {pkgs, ...}: {
     programs = {
-      qutebrowser = let
-        filepicker = [
-          "foot"
-          "-e"
-          "lf"
-          "-command"
-          "set nohidden"
-          "-selection-path={}"
-        ];
-      in {
+      qutebrowser = {
         enable = true;
         package = pkgs.qutebrowser.override {
           enableWideVine = true;
@@ -41,20 +32,6 @@
           content = {
             cookies.accept = "no-3rdparty";
             pdfjs = true;
-          };
-          editor.command = [
-            "foot"
-            "-e"
-            "tmux"
-            "new-session"
-            "vim"
-            "{file}"
-          ];
-          fileselect = {
-            handler = "external";
-            folder.command = filepicker;
-            multiple_files.command = filepicker;
-            single_file.command = filepicker;
           };
           scrolling.bar = "never";
           statusbar = {

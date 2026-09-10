@@ -9,14 +9,13 @@
 
   flake.nixosModules.fryingPanModule = {
     imports = [
-      self.nixosModules.myHomeManager
+      self.nixosModules.HomeManager
       self.nixosModules.lowgainModule
-      self.nixosModules.niri
       self.nixosModules.nix
-      self.nixosModules.shell
       self.nixosModules.desktop
-      # self.nixosModules.nvf
       self.nixosModules.gaming
+      self.nixosModules.niri
+      self.nixosModules.plymouth
     ];
 
     hardware = {
@@ -43,16 +42,10 @@
     ];
 
     time.timeZone = "America/Nassau";
-    i18n.defaultLocale = "en_US.UTF-8";
 
     boot = {
-      kernelParams = ["quiet" "rd.udev.log_level=3" "rd.systemd.show_status=auto"];
       blacklistedKernelModules = ["i2c_smbus" "i2c_piix4"]; # Silence boot errors
-      consoleLogLevel = 3;
-      initrd.verbose = false;
-      plymouth.enable = true;
       loader = {
-        timeout = 0;
         systemd-boot = {
           enable = true;
           memtest86.enable = true;
@@ -67,45 +60,7 @@
       networkmanager.enable = true;
     };
 
-    home-manager = {
-      sharedModules = [
-        self.homeModules.niri
-        self.homeModules.desktop
-        self.homeModules.gaming
-        self.homeModules.neovim
-        {
-          programs.niri.settings = {
-            outputs = {
-              "eDP-1" = {
-                mode = {
-                  width = 1920;
-                  height = 1080;
-                  refresh = 60.007999;
-                };
-                scale = 1.2;
-              };
-            };
-            window-rules = [
-              {
-                matches = [{app-id = "dev.noctalia.Noctalia";}];
-                open-floating = true;
-                default-column-width = {fixed = 1080;};
-                default-window-height = {fixed = 800;};
-              }
-            ];
-          };
-        }
-      ];
-      users.lowgain = self.homeModules.lowgainModule;
-    };
-
-    services = {
-      openssh.enable = true;
-      xserver.xkb.layout = "us";
-      fprintd.enable = true;
-      fwupd.enable = true;
-      fstrim.enable = true;
-    };
+    services.openssh.enable = true;
 
     # This option defines the first version of NixOS you have installed on this particular machine,
     # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

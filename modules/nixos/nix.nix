@@ -1,6 +1,15 @@
-{
+{inputs, ...}: {
   flake.nixosModules.nix = {
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs = {
+      config.allowUnfree = true;
+      overlays = [
+        (final: prev: {
+          unstable = import inputs.nixpkgs-unstable {
+            inherit (final) system config;
+          };
+        })
+      ];
+    };
 
     nix = {
       settings = {

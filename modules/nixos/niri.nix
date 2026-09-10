@@ -1,22 +1,32 @@
-{
-  self,
-  inputs,
-  ...
-}: {
-  flake.nixosModules.niri = {pkgs, ...}: {
-    imports = [
-      inputs.niri.nixosModules.niri
-      self.nixosModules.noctalia
-      self.nixosModules.noctalia-greeter
-    ];
+{self, ...}: {
+  flake.nixosModules.niri = {
+    lib,
+    options,
+    pkgs,
+    ...
+  }: {
+    config = lib.mkMerge [
+      {
+        # imports = [ self.nixosModules.regreet ];
 
-    nixpkgs.overlays = [inputs.niri.overlays.niri];
+        hardware.graphics.enable = lib.mkDefault true;
 
-    programs.niri.enable = true;
+        environment = {
+          sessionVariables.NIXOS_OZONE_WL = "1";
+          systemPackages = [pkgs.nautilus];
+        };
 
-    environment.systemPackages = with pkgs; [
-      nautilus
-      xwayland-satellite
+        security.polkit.enable = true;
+
+        programs = {
+          regreet.enable = true;
+          dconf.enable = true;
+          niri.enable = true;
+        };
+      }
+      (lib.optionalAttrs (options ? home-manager) {
+        home-manager.sharedModules = [self.homeModules.niri];
+      })
     ];
   };
 }

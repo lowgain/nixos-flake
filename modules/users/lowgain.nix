@@ -1,4 +1,4 @@
-{
+{self, ...}: {
   flake.nixosModules.lowgainModule = {
     users.users.lowgain = {
       isNormalUser = true;
@@ -11,29 +11,41 @@
     };
   };
 
-  flake.homeModules.lowgainModule = {pkgs, ...}: {
-    home = {
-      username = "lowgain";
-      homeDirectory = "/home/lowgain";
-      stateVersion = "26.05";
-      packages = with pkgs; [
-        net-tools
-        util-linux
-        coreutils-full
-        nmap
-        traceroute
-        inetutils
-        usbutils
-        pciutils
-        tree
-      ];
-    };
+  flake.homeModules.lowgainModule = {
+    lib,
+    config,
+    pkgs,
+    ...
+  }: {
+    imports = [self.homeModules.lowgainTheme];
+    config =
+      lib.mkMerge [
+        {
+          home = {
+            username = "lowgain";
+            homeDirectory = "/home/lowgain";
+            stateVersion = "26.05";
+          };
 
-    programs.git.settings = {
-      user = {
-        name = "Lowgain";
-        email = "logan.t2020@tutanota.com";
-      };
-    };
+          programs.git.settings = {
+            user = {
+              name = "Lowgain";
+              email = "logan.t2020@tutanota.com";
+            };
+          };
+        }
+        (lib.mkIf config.wayland.windowManager.niri.enable {
+          wayland.windowManager.niri.settings.spawn-sh-at-startup = "${pkgs.swaybg}/bin/swaybg -i /home/lowgain/Pictures/Walls/picture-shrine-green.jpg";
+        })
+        (lib.mkIf config.programs.qutebrowser.enable {
+          xdg.mimeApps.defaultApplications = {
+            "text/html" = "org.qutebrowser.qutebrowser.desktop";
+            "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+            "x-scheme-handler/https" = "org.qutebrowser.qutebrowser.desktop";
+            "x-scheme-handler/about" = "org.qutebrowser.qutebrowser.desktop";
+            "x-scheme-handler/unknown" = "org.qutebrowser.qutebrowser.desktop";
+          };
+        })
+      ];
   };
 }
